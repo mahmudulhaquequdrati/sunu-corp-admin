@@ -75,7 +75,7 @@ const Details = () => {
                 }}
               />
               <span className="text-sm absolute top-0 -right-1">
-                {notificationLS.length ? notificationLS.length : 0}
+                {notificationLS?.length ? notificationLS?.length : 0}
               </span>
             </p>
           </div>
@@ -128,8 +128,8 @@ const Details = () => {
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
-                {datas.map((item) => (
-                  <tr key={item._id}>
+                {datas?.map((item) => (
+                  <tr key={item?._id}>
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div className="flex items-center">
                         <div className="">
