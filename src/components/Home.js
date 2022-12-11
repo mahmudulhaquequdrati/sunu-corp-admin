@@ -1,49 +1,33 @@
-import React, { useEffect } from "react";
+import React from "react";
 import logo from "../assets/logo.jpeg";
 import physics from "../assets/physics.jpg";
 import science from "../assets/science.jpg";
 import cetificate from "../assets/certificate.jpg";
 import library from "../assets/library.jpg";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Home = () => {
   const navigate = useNavigate();
 
-  // useEffect(() => {
-  //   //https://sunu-corp-backend-production.up.railway.app/
-  //   // http://192.168.0.107:5000
-  //   const socket = io("https://sunu-corp-backend-production.up.railway.app");
-
-  //   // socket.on("connect", () => {
-  //   //   console.log("connected");
-  //   // });
-  //   // socket.on("disconnect", () => {
-  //   //   console.log("disconnected");
-  //   // });
-  //   // socket.on("message", (message) => {
-  //   //   console.log(message);
-  //   // });
-  // }, []);
-
   const categories = [
     {
       id: 1,
-      name: "Science",
+      name: "Attestation-Speciale",
       picture: science,
     },
     {
       id: 2,
-      name: "Physics",
+      name: "Diplôme-du-Bac",
       picture: physics,
     },
     {
       id: 3,
-      name: "Certificate",
+      name: "Duplicata-Diplôme-Bac",
       picture: cetificate,
     },
     {
       id: 4,
-      name: "Library",
+      name: "Relevés-de-Notes",
       picture: library,
     },
   ];
@@ -54,7 +38,14 @@ const Home = () => {
 
   return (
     <div className="m-12">
-      <img src={logo} alt="logo" className="w-24 mx-auto" />
+      <div className="flex justify-between my-4">
+        <img src={logo} alt="logo" className="w-24 " />
+        <Link to="/">
+          <button className="bg-blue-500 text-white py-2 px-8 rounded-lg ">
+            Home
+          </button>
+        </Link>
+      </div>
       <h3 className="text-center font-medium mt-4">Welcome to admin panel</h3>
       <p className="text-center font-medium mt-2">
         Chose any category to see all of the request.

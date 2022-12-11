@@ -23,17 +23,24 @@ const Notification = () => {
   return (
     <div>
       <div className="my-8">
-        <Link to="/">
-          <img src={logo} alt="logo" className="w-24 mx-auto mb-4" />
-        </Link>
+        <div className="flex justify-between my-4 mx-20">
+          <Link to="/">
+            <img src={logo} alt="logo" className="w-24 " />
+          </Link>
+          <Link to="/">
+            <button className="bg-blue-500 text-white py-2 px-8 rounded-lg">
+              Home
+            </button>
+          </Link>
+        </div>
       </div>
       <div className="text-center">
         <h1 className="text-center text-2xl">Notification</h1>
-        {notificationLS.length < 1 && (
+        {notificationLS?.length < 1 && (
           <p className="text-center text-xl">You have no notification</p>
         )}
         <div>
-          {notificationLS.map((item) => (
+          {notificationLS?.map((item) => (
             <div
               className="shadow w-3/4 mx-auto px-6 py-3 rounded-lg my-2 flex "
               key={item._id}

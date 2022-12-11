@@ -7,7 +7,6 @@ const SingleDetails = () => {
   const [singleData, setSingleData] = React.useState({});
   const { id } = useParams();
   const navigate = useNavigate();
-  console.log(singleData);
 
   useEffect(() => {
     fetch(`https://sunu-corp-backend-production.up.railway.app/id/${id}`)
@@ -58,12 +57,22 @@ const SingleDetails = () => {
         }
       });
   };
-
+  let date = singleData?.createdAt;
+  if (date) {
+    date = date.split("T")[0];
+  }
   return (
     <div className="mx-24 mt-8 text-center">
-      <Link to="/">
-        <img src={logo} alt="logo" className="w-24 mx-auto" />
-      </Link>
+      <div className="flex justify-between">
+        <Link to="/">
+          <img src={logo} alt="logo" className="w-24 mx-auto" />
+        </Link>
+        <Link to="/">
+          <button className="bg-blue-500 text-white py-2 px-8 rounded-lg">
+            Home
+          </button>
+        </Link>
+      </div>
       <div className="shadow px-16 pb-16">
         <h1 className="my-6">Single Details</h1>
         <p className="my-4">Document:) </p>
@@ -80,15 +89,17 @@ const SingleDetails = () => {
 
         <p className="my-4">Requested Email : {singleData?.email}</p>
 
-        <p className="my-4">Requested Number : {singleData.number}</p>
+        <p className="my-4">Requested Number : {singleData?.number}</p>
 
-        <h2>Description: {singleData.description}</h2>
+        <p className="my-4">Submitted At : {date} </p>
+
+        <h2>Description: {singleData?.description}</h2>
 
         <button
           className="bg-blue-500 text-white px-4 py-2 rounded-lg mt-4"
-          onClick={() => handleUpdate(singleData._id, "Approved")}
+          onClick={() => handleUpdate(singleData._id, "Ready")}
         >
-          Approve
+          Ready
         </button>
 
         <button
@@ -102,6 +113,14 @@ const SingleDetails = () => {
           className="bg-red-500 text-white px-4 py-2 rounded-lg mt-4 ml-4"
         >
           Delete
+        </button>
+        <button
+          onClick={() =>
+            handleUpdate(singleData._id, "picked up by customer already")
+          }
+          className="bg-green-500 text-white px-4 py-2 rounded-lg mt-4 ml-4"
+        >
+          Completed
         </button>
       </div>
     </div>

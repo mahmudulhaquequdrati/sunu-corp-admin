@@ -1,8 +1,5 @@
 import React, { useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { FcApproval } from "react-icons/fc";
-import { RxCross2 } from "react-icons/rx";
-import { MdPendingActions } from "react-icons/md";
 import logo from "../assets/logo.jpeg";
 import { Link } from "react-router-dom";
 import { IoIosNotifications } from "react-icons/io";
@@ -17,28 +14,7 @@ const Details = () => {
   const { category } = useParams();
   const navigate = useNavigate();
   const { notificationLS } = React.useContext(NotificationContext);
-
-  // const { notification, setNotification } = useNoti();
-
-  // use usememo for notifcation
-
-  // const [notification, setNotification] = useState([]);
-  useEffect(() => {
-    const socket = io("https://sunu-corp-backend-production.up.railway.app");
-    // setSocketUser(socket);
-    socket.on("userInfo", (info) => {
-      let userInfo = [];
-      userInfo = JSON.parse(localStorage.getItem("notification")) || [];
-      userInfo.push(info);
-      localStorage.setItem("notification", JSON.stringify(userInfo));
-      //  React.useEffect(() => {
-      //    localStorage.setItem("notification", JSON.stringify(notification));
-      //  }, [notification]);
-
-      // allNotification = notification;
-    });
-  }, []);
-  // console.log(notification);
+  //https:sunu-corp-backend-production.up.railway.app
 
   useEffect(() => {
     fetch(`https://sunu-corp-backend-production.up.railway.app/${category}`)
@@ -58,9 +34,16 @@ const Details = () => {
     <div className="flex flex-col mt-8 mx-12">
       <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
         <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
-          <Link to="/">
-            <img src={logo} alt="logo" className="w-24 mx-auto mb-4" />
-          </Link>
+          <div className="flex justify-between">
+            <Link to="/">
+              <img src={logo} alt="logo" className="w-24 mx-auto" />
+            </Link>
+            <Link to="/">
+              <button className="bg-blue-500 text-white py-2 px-8 rounded-lg">
+                Home
+              </button>
+            </Link>
+          </div>
           <div className="flex justify-between my-6">
             <h2 className="text-center font-medium text-xl mb-4">
               All lists are comming from {category} section.
@@ -171,13 +154,9 @@ const Details = () => {
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div className="text-sm text-gray-900">
-                        {item?.status === "Approved" ? (
-                          <FcApproval
-                            style={{
-                              color: "green",
-                              fontSize: "30px",
-                            }}
-                          />
+                        {item?.status ? item?.status : "Pending"}
+                        {/* {item?.status === "Approved" ? (
+                         <p></p>
                         ) : item?.status === "Denied" ? (
                           <RxCross2
                             style={{
@@ -192,7 +171,7 @@ const Details = () => {
                               fontSize: "30px",
                             }}
                           />
-                        )}
+                        )} */}
                       </div>
                     </td>
                   </tr>
